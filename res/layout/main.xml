@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="100dp" >
+
+    <ImageView
+        android:id="@+id/ImageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="450dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon" 
+        android:padding="20dp" />
+
+    <!--
+         <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="@string/app_info"
+        android:textSize="40sp" />
+    -->
+
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_below="@+id/ImageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginTop="50dp">
+        
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1.0"
+            android:text="@string/start_recording"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btnStop"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1.0"
+            android:text="@string/stop_recording"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_below="@+id/LinearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btnList"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1.0"
+            android:text="@string/audio_list"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1.0"
+            android:text="@string/settings"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</RelativeLayout>
