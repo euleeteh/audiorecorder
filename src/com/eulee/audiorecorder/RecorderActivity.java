@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import com.varma.samples.audiorecorder.R;
+//import com.varma.samples.audiorecorder.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -281,7 +281,7 @@ public class RecorderActivity extends Activity {
 				break;
 
 			case R.id.btnStop:
-				AppLog.logString("Start Recording");
+				AppLog.logString("Stop Recording");
 				enableButtons(false);
 				stopRecording();
 				break;

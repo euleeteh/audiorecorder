@@ -1,6 +1,6 @@
 package com.eulee.audiorecorder;
 
-import com.varma.samples.audiorecorder.R;
+//import com.varma.samples.audiorecorder.R;
 
 import android.app.Activity;
 import android.os.Bundle;
