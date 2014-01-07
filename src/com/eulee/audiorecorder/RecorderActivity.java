@@ -15,6 +15,8 @@ import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -34,6 +36,8 @@ public class RecorderActivity extends Activity {
 	private int bufferSize = 0;
 	private Thread recordingThread = null;
 	private boolean isRecording = false;
+
+    public String currentFileName;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -70,11 +74,8 @@ public class RecorderActivity extends Activity {
 		String filepath = Environment.getExternalStorageDirectory().getPath();
 		File file = new File(filepath, AUDIO_RECORDER_FOLDER);
 
-		if (!file.exists()) {
-			file.mkdirs();
-		}
-
-		return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + AUDIO_RECORDER_FILE_EXT_WAV);
+        currentFileName = file.getAbsolutePath() + "/" + System.currentTimeMillis();
+		return (currentFileName + AUDIO_RECORDER_FILE_EXT_WAV);
 	}
 	
 	private String getBackupFilename() {
@@ -85,7 +86,7 @@ public class RecorderActivity extends Activity {
 			file.mkdirs();
 		}
 
-		return (file.getAbsolutePath() + "/" + System.currentTimeMillis() + "bk" + AUDIO_RECORDER_FILE_EXT_WAV);
+		return (currentFileName + "bk" + AUDIO_RECORDER_FILE_EXT_WAV);
 	}
 
 	private String getTempFilename() {
@@ -173,6 +174,12 @@ public class RecorderActivity extends Activity {
 		copyWaveFile(getTempFilename(), getFilename());
 		copyWaveFile(getTempFilename(), getBackupFilename());
 		deleteTempFile();
+
+        File file = new File(currentFileName + AUDIO_RECORDER_FILE_EXT_WAV);
+
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+        sendBroadcast(intent);
 	}
 
 	private void deleteTempFile() {
@@ -209,6 +216,7 @@ public class RecorderActivity extends Activity {
 
 			in.close();
 			out.close();
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
