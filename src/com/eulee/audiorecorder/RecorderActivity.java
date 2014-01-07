@@ -15,18 +15,18 @@ import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.text.format.Time;
 
 public class RecorderActivity extends Activity {
 	private static final int RECORDER_BPP = 16;
 	private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
 	private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
-	private static final String AUDIO_RECORDER_BACKUP_FOLDER = "AudioRecorderBk";
+	//private static final String AUDIO_RECORDER_BACKUP_FOLDER = "AudioRecorderBk";
 	private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw"; 
 	private static final int RECORDER_SAMPLERATE = 44100;
 	private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
@@ -71,33 +71,36 @@ public class RecorderActivity extends Activity {
 	}
 
 	private String getFilename() {
-		String filepath = Environment.getExternalStorageDirectory().getPath();
-		File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+		String filePath = Environment.getExternalStorageDirectory().getPath();
+		File file = new File(filePath, AUDIO_RECORDER_FOLDER);
 
-        currentFileName = file.getAbsolutePath() + "/" + System.currentTimeMillis();
+        Time currentTime = new Time();
+        currentTime.setToNow();
+
+        currentFileName = file.getAbsolutePath() + "/" + currentTime.format2445();
 		return (currentFileName + AUDIO_RECORDER_FILE_EXT_WAV);
 	}
 	
 	private String getBackupFilename() {
-		String filepath = Environment.getExternalStorageDirectory().getPath();
-		File file = new File(filepath, AUDIO_RECORDER_BACKUP_FOLDER);
 
-		if (!file.exists()) {
-			file.mkdirs();
-		}
+/*        String filePath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filePath, AUDIO_RECORDER_BACKUP_FOLDER);
 
-		return (currentFileName + "bk" + AUDIO_RECORDER_FILE_EXT_WAV);
+        if (!file.exists()) {
+            file.mkdirs();
+        }*/
+		return (currentFileName + ".bk");
 	}
 
 	private String getTempFilename() {
-		String filepath = Environment.getExternalStorageDirectory().getPath();
-		File file = new File(filepath, AUDIO_RECORDER_FOLDER);
+		String filePath = Environment.getExternalStorageDirectory().getPath();
+		File file = new File(filePath, AUDIO_RECORDER_FOLDER);
 
 		if (!file.exists()) {
 			file.mkdirs();
 		}
 
-		File tempFile = new File(filepath, AUDIO_RECORDER_TEMP_FILE);
+		File tempFile = new File(filePath, AUDIO_RECORDER_TEMP_FILE);
 
 		if (tempFile.exists())
 			tempFile.delete();
