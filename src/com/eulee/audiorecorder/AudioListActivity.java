@@ -1,8 +1,5 @@
 package com.eulee.audiorecorder;
 
-//import com.varma.samples.audiorecorder.R;
-
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,12 +48,18 @@ public class AudioListActivity extends ListActivity {
 
 
 
-        /*// selecting single ListView item
+        // selecting single ListView item
         ListView lv = getListView();
         // listening to single listitem click
-        lv.setOnItemClickListener(new OnItemClickListener() {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
+            public void onItemClick(AdapterView parent, View view,int position, long id){
+                AppLog.logString("playing " + id);
+                /*Intent playFile = new Intent(getApplicationContext(), PlaybackActivity.class);
+                startActivity(playFile);*/
+            }
+            /*@Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // getting listitem index
@@ -70,8 +73,8 @@ public class AudioListActivity extends ListActivity {
                 setResult(100, in);
                 // Closing PlayListView
                 finish();
-            }
-        });*/
+            }*/
+        });
 	}
     /**
      * Class to filter files which are having .mp3 extension

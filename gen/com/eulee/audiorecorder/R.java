@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.varma.samples.audiorecorder;
+package com.eulee.audiorecorder;
 
 public final class R {
     public static final class attr {
@@ -26,25 +26,30 @@ public final class R {
         public static final int mm=0x7f020002;
     }
     public static final class id {
-        public static final int ImageView1=0x7f070007;
-        public static final int LinearLayout1=0x7f070008;
-        public static final int LinearLayout2=0x7f07000b;
+        public static final int ImageView1=0x7f070009;
+        public static final int LinearLayout1=0x7f07000a;
+        public static final int LinearLayout2=0x7f07000d;
         public static final int RelativeLayout1=0x7f070000;
         public static final int btnAudioDone=0x7f070001;
-        public static final int btnList=0x7f07000c;
-        public static final int btnSettings=0x7f07000d;
-        public static final int btnSettingsDone=0x7f070005;
-        public static final int btnStart=0x7f070009;
-        public static final int btnStop=0x7f07000a;
-        public static final int listView1=0x7f070002;
-        public static final int textView2=0x7f070004;
-        public static final int textView3=0x7f070003;
-        public static final int toggleButton1=0x7f070006;
+        public static final int btnList=0x7f07000e;
+        public static final int btnSettings=0x7f07000f;
+        public static final int btnSettingsDone=0x7f070007;
+        public static final int btnStart=0x7f07000b;
+        public static final int btnStop=0x7f07000c;
+        public static final int container=0x7f070003;
+        public static final int listView1=0x7f070006;
+        public static final int path=0x7f070002;
+        public static final int rowtext=0x7f070010;
+        public static final int textView2=0x7f070005;
+        public static final int textView3=0x7f070004;
+        public static final int toggleButton1=0x7f070008;
     }
     public static final class layout {
         public static final int activity_audiolist=0x7f030000;
-        public static final int activity_settings=0x7f030001;
-        public static final int main=0x7f030002;
+        public static final int activity_playback=0x7f030001;
+        public static final int activity_settings=0x7f030002;
+        public static final int main=0x7f030003;
+        public static final int row=0x7f030004;
     }
     public static final class string {
         /**  <string name="app_info">This is a sample application to record audio.\n\nTo start recording press \&quot;Record\&quot; button, to stop recording press \&quot;Stop\&quot; button.</string> 

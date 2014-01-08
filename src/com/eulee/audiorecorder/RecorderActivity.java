@@ -11,8 +11,12 @@ import java.io.IOException;
 //import com.varma.samples.audiorecorder.R;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -39,6 +43,9 @@ public class RecorderActivity extends Activity {
 
     public String currentFileName;
 
+    AudioManager am;
+    //BroadcastReceiver registerReceiver;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +56,7 @@ public class RecorderActivity extends Activity {
 
 		bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,
 				RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
+        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 	}
 
 	private void setButtonHandlers() {
@@ -109,7 +117,53 @@ public class RecorderActivity extends Activity {
 	}
 
 	private void startRecording() {
-		recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
+
+        registerReceiver(new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                int state = intent.getIntExtra(AudioManager.EXTRA_SCO_AUDIO_STATE, -1);
+                AppLog.logString("Audio SCO state: " + state);
+
+                if (AudioManager.SCO_AUDIO_STATE_CONNECTED == state) {
+            /*
+             * Now the connection has been established to the bluetooth device.
+             * Record audio or whatever (on another thread).With AudioRecord you can record with an object created like this:
+             * new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_CONFIGURATION_MONO,
+             * AudioFormat.ENCODING_PCM_16BIT, audioBufferSize);
+             *
+             * After finishing, don't forget to unregister this receiver and
+             * to stop the bluetooth connection with am.stopBluetoothSco();
+             */
+
+                    if (isRecording == false){
+                        unregisterReceiver(this);
+                    }
+                }
+
+            }
+        }, new IntentFilter(AudioManager.ACTION_SCO_AUDIO_STATE_CHANGED));
+        AppLog.logString("starting bluetooth");
+        am.startBluetoothSco();
+
+        recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
+                RECORDER_SAMPLERATE, RECORDER_CHANNELS,
+                RECORDER_AUDIO_ENCODING, bufferSize);
+
+        recorder.startRecording();
+
+        isRecording = true;
+
+        recordingThread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                writeAudioDataToFile();
+            }
+        }, "AudioRecorder Thread");
+
+        recordingThread.start();
+		/*recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
 				RECORDER_SAMPLERATE, RECORDER_CHANNELS,
 				RECORDER_AUDIO_ENCODING, bufferSize);
 
@@ -125,7 +179,7 @@ public class RecorderActivity extends Activity {
 			}
 		}, "AudioRecorder Thread");
 
-		recordingThread.start();
+		recordingThread.start();*/
 	}
 
 	private void writeAudioDataToFile() {
@@ -183,6 +237,9 @@ public class RecorderActivity extends Activity {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         intent.setData(Uri.fromFile(file));
         sendBroadcast(intent);
+        //unregisterReceiver(registerReceiver);
+        AppLog.logString("Stopping bluetooth");
+        am.stopBluetoothSco();
 	}
 
 	private void deleteTempFile() {
