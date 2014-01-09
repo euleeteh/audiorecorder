@@ -136,7 +136,7 @@ public class RecorderActivity extends Activity {
              * to stop the bluetooth connection with am.stopBluetoothSco();
              */
 
-                    if (isRecording == false){
+                    if (!isRecording){
                         unregisterReceiver(this);
                     }
                 }
