@@ -18,6 +18,7 @@ import android.content.IntentFilter;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
+import android.media.AudioTrack;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,17 +34,18 @@ public class RecorderActivity extends Activity {
 	//private static final String AUDIO_RECORDER_BACKUP_FOLDER = "AudioRecorderBk";
 	private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw"; 
 	private static final int RECORDER_SAMPLERATE = 44100;
-	private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
+	private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
 	private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
 	private AudioRecord recorder = null;
+    private AudioTrack liveStream = null;
 	private int bufferSize = 0;
 	private Thread recordingThread = null;
 	private boolean isRecording = false;
 
     public String currentFileName;
 
-    AudioManager am;
+    private AudioManager am;
     //BroadcastReceiver registerReceiver;
 
 	@Override
@@ -150,7 +152,12 @@ public class RecorderActivity extends Activity {
                 RECORDER_SAMPLERATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, bufferSize);
 
+        liveStream = new AudioTrack(AudioManager.STREAM_DTMF, RECORDER_SAMPLERATE, AudioFormat.CHANNEL_OUT_MONO, RECORDER_AUDIO_ENCODING, bufferSize, AudioTrack.MODE_STREAM);
+        liveStream.setPlaybackRate(RECORDER_SAMPLERATE);
+
         recorder.startRecording();
+
+
 
         isRecording = true;
 
@@ -196,9 +203,12 @@ public class RecorderActivity extends Activity {
 
 		int read = 0;
 
+        liveStream.play();
+
 		if (null != os) {
 			while (isRecording) {
 				read = recorder.read(data, 0, bufferSize);
+                liveStream.write(data,0,data.length);
 
 				if (AudioRecord.ERROR_INVALID_OPERATION != read) {
 					try {
@@ -254,7 +264,7 @@ public class RecorderActivity extends Activity {
 		long totalAudioLen = 0;
 		long totalDataLen = totalAudioLen + 36;
 		long longSampleRate = RECORDER_SAMPLERATE;
-		int channels = 2;
+		int channels = 1;
 		long byteRate = RECORDER_BPP * RECORDER_SAMPLERATE * channels / 8;
 
 		byte[] data = new byte[bufferSize];
