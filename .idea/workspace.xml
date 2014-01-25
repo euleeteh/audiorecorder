@@ -103,13 +103,18 @@
       <file leaf-file-name="RecorderActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="46" selection-start="5412" selection-end="5412" vertical-scroll-proportion="0.175" vertical-offset="2023" max-vertical-offset="8857">
+            <state line="210" column="26" selection-start="8142" selection-end="8142" vertical-scroll-proportion="0.84816754" vertical-offset="3084" max-vertical-offset="6936">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9321#9503#0" expanded="true" />
-                <element signature="e#9484#9485#0" expanded="true" />
-                <element signature="e#16615#18910#0" expanded="true" />
-                <element signature="e#18903#18904#0" expanded="true" />
+                <element signature="e#5783#6385#0" expanded="true" />
+                <element signature="e#6370#6371#0" expanded="true" />
+                <element signature="e#6495#8287#0" expanded="true" />
+                <element signature="e#8272#8273#0" expanded="true" />
+                <element signature="method#deleteTempFile#0;class#RecorderActivity#0" expanded="false" />
+                <element signature="method#copyWaveFile#0;class#RecorderActivity#0" expanded="false" />
+                <element signature="method#WriteWaveFileHeader#0;class#RecorderActivity#0" expanded="false" />
+                <element signature="e#15287#18200#0" expanded="true" />
+                <element signature="e#18193#18194#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -554,8 +559,8 @@
         <option value="$USER_HOME$/Desktop/bt_stack.conf" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/local.properties" />
-        <option value="$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java" />
       </list>
     </option>
   </component>
@@ -1005,13 +1010,13 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997833" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49378532" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28474575" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2542373" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15819208" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17288135" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2937853" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="-1678" y="316" width="1680" height="678" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1139,13 +1144,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="46" selection-start="5412" selection-end="5412" vertical-scroll-proportion="0.175" vertical-offset="2023" max-vertical-offset="8857">
+        <state line="210" column="26" selection-start="8142" selection-end="8142" vertical-scroll-proportion="0.84816754" vertical-offset="3084" max-vertical-offset="6936">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9321#9503#0" expanded="true" />
-            <element signature="e#9484#9485#0" expanded="true" />
-            <element signature="e#16615#18910#0" expanded="true" />
-            <element signature="e#18903#18904#0" expanded="true" />
+            <element signature="e#5783#6385#0" expanded="true" />
+            <element signature="e#6370#6371#0" expanded="true" />
+            <element signature="e#6495#8287#0" expanded="true" />
+            <element signature="e#8272#8273#0" expanded="true" />
+            <element signature="method#deleteTempFile#0;class#RecorderActivity#0" expanded="false" />
+            <element signature="method#copyWaveFile#0;class#RecorderActivity#0" expanded="false" />
+            <element signature="method#WriteWaveFileHeader#0;class#RecorderActivity#0" expanded="false" />
+            <element signature="e#15287#18200#0" expanded="true" />
+            <element signature="e#18193#18194#0" expanded="true" />
           </folding>
         </state>
       </provider>
