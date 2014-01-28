@@ -2,25 +2,20 @@ package com.eulee.audiorecorder;
 
 //Audio recorder/encoder obtained from:
 //http://www.devlper.com/2010/12/android-audio-recording-part-2/
+//Edited by Eu-Lee Teh 2013
+
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.List;
-
-//import com.varma.samples.audiorecorder.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothHeadset;
-import android.bluetooth.BluetoothProfile;
-import android.bluetooth.BluetoothSocket;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
@@ -29,7 +24,6 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +34,6 @@ public class RecorderActivity extends Activity {
     private static final int RECORDER_BPP = 16;
     private static final String AUDIO_RECORDER_FILE_EXT_WAV = ".wav";
     private static final String AUDIO_RECORDER_FOLDER = "AudioRecorder";
-    //private static final String AUDIO_RECORDER_BACKUP_FOLDER = "AudioRecorderBk";
     private static final String AUDIO_RECORDER_TEMP_FILE = "record_temp.raw";
     private static final int RECORDER_SAMPLERATE = 44100;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
@@ -52,17 +45,10 @@ public class RecorderActivity extends Activity {
     private Thread recordingThread = null;
     private Thread btMicCheckerThread = null;
     private boolean isRecording = false;
-    private boolean enableCheckerThread = false;
     private View stopButtonView;
+    private String currentFileName;
+    private static AudioManager localAudioManager;
 
-    public String currentFileName;
-
-    private AudioManager localAudioManager;
-    private BluetoothAdapter mAdapter;
-    public int state;
-    private Context mContext = null;
-    public static int headsetAudioState;
-    private BluetoothHeadset mBluetoothHeadset;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,24 +85,10 @@ public class RecorderActivity extends Activity {
     }
 
     private String getFilename() {
-        String filePath = Environment.getExternalStorageDirectory().getPath();
-        File file = new File(filePath, AUDIO_RECORDER_FOLDER);
-
-        Time currentTime = new Time();
-        currentTime.setToNow();
-
-        currentFileName = file.getAbsolutePath() + "/" + currentTime.format2445();
         return (currentFileName + AUDIO_RECORDER_FILE_EXT_WAV);
     }
 
     private String getBackupFilename() {
-
-/*        String filePath = Environment.getExternalStorageDirectory().getPath();
-        File file = new File(filePath, AUDIO_RECORDER_BACKUP_FOLDER);
-
-        if (!file.exists()) {
-            file.mkdirs();
-        }*/
         return (currentFileName + ".bk");
     }
 
@@ -137,14 +109,14 @@ public class RecorderActivity extends Activity {
     }
 
     private void startRecording() {
+        String filePath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filePath, AUDIO_RECORDER_FOLDER);
 
+        Time currentTime = new Time();
+        currentTime.setToNow();
 
-//        AppLog.logString("starting bluetooth audio SCO connection...");
-//        localAudioManager.startBluetoothSco();
-//        isRecording = true;
-//        int countDown = 1000;
-//        try{
-//            wait(200);
+        currentFileName = file.getAbsolutePath() + "/" + currentTime.format2445();
+
         if(localAudioManager.isBluetoothScoOn()){
             recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                     RECORDER_SAMPLERATE, RECORDER_CHANNELS,
@@ -161,15 +133,7 @@ public class RecorderActivity extends Activity {
 
                 @Override
                 public void run() {
-                    enableCheckerThread = true;
                     writeAudioDataToFile();
-//                        if(localAudioManager.isBluetoothScoOn()){
-//                            AppLog.logString("Stop Recording");
-//                            enableButtons(false);
-//                            stopRecording();
-//                            AppLog.logString("Stopping bluetooth");
-//                            localAudioManager.stopBluetoothSco();
-//                        }
                 }
             }, "AudioRecorder Thread");
 
@@ -178,42 +142,30 @@ public class RecorderActivity extends Activity {
             btMicCheckerThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    AppLog.logString("checker thread running");
-                    try{
-                        //AppLog.logString("check: BT mic is on:" + Boolean.toString(localAudioManager.isBluetoothScoOn()));
-                        while (true) {
-                            if (!localAudioManager.isBluetoothScoOn()) {
 
-                                AppLog.logString("Stop Recording - device disconnected");
-                                //enableCheckerThread = false;
-                                //enableButtons(false);
-                                //stopButtonView.performClick();
-//                                stopRecording();
-                                Throwable eSome = new Throwable("something");
-                                throw eSome;
-                            }
+                    AppLog.logString("checker thread running");
+
+                    while (true) {
+                        if (!localAudioManager.isBluetoothScoOn()) {
+
+                            AppLog.logString("Stop Recording - device disconnected");
+                            stopRecording();
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // This code will always run on the UI thread, therefore is safe to modify UI elements.
+                                    Toast toast = Toast.makeText(getApplicationContext(), "Device Disconnected. Stop Recording...", Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    enableButtons(false);
+                                    AppLog.logString("Stopping bluetooth");
+                                    localAudioManager.stopBluetoothSco();
+                                }
+                            });
+                            return;
                         }
-                    }
-//                    catch (Exception e){
-//
-//                        AppLog.logString("caught");
-//                        stopRecording();
-//                        AppLog.logString("Stopping bluetooth");
-//                        localAudioManager.stopBluetoothSco();
-//                        AppLog.logString("error: " + e.toString());
-//                    }
-                    catch (Throwable throwable) {
-                        throwable.printStackTrace();
-                        AppLog.logString("caught");
-                        stopRecording();
-                        AppLog.logString("Stopping bluetooth");
-                        localAudioManager.stopBluetoothSco();
-                        //enableButtons(false);
-                        //AppLog.logString("error: " + e.toString());
                     }
                 }
             },"Mic CheckerThread");
-
             btMicCheckerThread.start();
         }
         else{
@@ -221,7 +173,6 @@ public class RecorderActivity extends Activity {
             return;
         }
     }
-
 
     private void writeAudioDataToFile() {
         byte data[] = new byte[bufferSize];
@@ -275,25 +226,15 @@ public class RecorderActivity extends Activity {
             recorder = null;
             liveStream = null;
             recordingThread = null;
-            //btMicCheckerThread = null;
         }
-        AppLog.logString("Pass 1");
         copyWaveFile(getTempFilename(), getFilename());
         copyWaveFile(getTempFilename(), getBackupFilename());
         deleteTempFile();
 
         File file = new File(currentFileName + AUDIO_RECORDER_FILE_EXT_WAV);
-        AppLog.logString("Pass 2");
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         intent.setData(Uri.fromFile(file));
         sendBroadcast(intent);
-        AppLog.logString("Pass 3");
-        //unregisterReceiver();
-//        AppLog.logString("Stopping bluetooth");
-//        am.stopBluetoothSco();
-        AppLog.logString("Pass 4");
-        //enableButtons(false);
-        AppLog.logString("Pass 5");
     }
 
     private void deleteTempFile() {
@@ -303,10 +244,10 @@ public class RecorderActivity extends Activity {
     }
 
     private void copyWaveFile(String inFilename, String outFilename) {
-        FileInputStream in = null;
-        FileOutputStream out = null;
+        FileInputStream in;
+        FileOutputStream out;
         long totalAudioLen = 0;
-        long totalDataLen = totalAudioLen + 36;
+        long totalDataLen;
         long longSampleRate = RECORDER_SAMPLERATE;
         int channels = 2;
         long byteRate = RECORDER_BPP * RECORDER_SAMPLERATE * channels / 8;
@@ -392,39 +333,6 @@ public class RecorderActivity extends Activity {
         out.write(header, 0, 44);
     }
 
-    /*private void initialiseRecording(){
-        AppLog.logString("Check1");
-        boolean isHeadsetConnected = false;
-        BluetoothHeadset mBluetoothHeadset;
-
-        // Get the default adapter
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        // Establish connection to the proxy.
-        mBluetoothAdapter.getProfileProxy(context, mProfileListener, BluetoothProfile.HEADSET);
-
-        try {
-            Method method = mAdapter.getClass().getMethod("getProfileConnectionState", int.class);
-            // retval = mAdapter.getProfileConnectionState(android.bluetooth.BluetoothProfile.HEADSET) != android.bluetooth.BluetoothProfile.STATE_DISCONNECTED;
-            isHeadsetConnected = (Integer)method.invoke(mAdapter, 1) != 0;
-            AppLog.logString(Boolean.toString(isHeadsetConnected));
-            if (isHeadsetConnected){
-                //check if bluetooth device is connected
-                //if it is - show toast "Recording..."
-                AppLog.logString("Start Recording");
-                startRecording();
-                enableButtons(true);
-            }
-            else{
-                //else - show toast "Device Not Connected"
-                AppLog.logString("Device Not Connected 1");
-            }
-        } catch (Exception exc) {
-            AppLog.logString("Device Not Connected 2");
-            // nothing to do
-        }
-    }*/
-
     private View.OnClickListener btnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -436,7 +344,7 @@ public class RecorderActivity extends Activity {
 
             switch (v.getId()) {
                 case R.id.btnStart:
-//                initialiseRecording();
+
                     AppLog.logString("starting bluetooth audio SCO connection...");
                     localAudioManager.startBluetoothSco();
                     AppLog.logString("check 1: BT mic is on: " + Boolean.toString(localAudioManager.isBluetoothScoOn()));
@@ -456,9 +364,6 @@ public class RecorderActivity extends Activity {
                     toast = Toast.makeText(context, toastText, duration);
                     toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
                     toast.show();
-                    //AppLog.logString("Start Recording");
-                    //enableButtons(true);
-                    //startRecording();
                     break;
 
                 case R.id.btnStop:
