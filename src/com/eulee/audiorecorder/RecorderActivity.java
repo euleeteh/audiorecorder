@@ -12,8 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothHeadset;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioFormat;
@@ -45,7 +43,6 @@ public class RecorderActivity extends Activity {
     private Thread recordingThread = null;
     private Thread btMicCheckerThread = null;
     private boolean isRecording = false;
-    private View stopButtonView;
     private String currentFileName;
     private static AudioManager localAudioManager;
 
@@ -54,8 +51,8 @@ public class RecorderActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        stopButtonView= findViewById(R.id.btnStop);
 
+        //initialise buttons
         setButtonHandlers();
         enableButtons(false);
 
@@ -67,7 +64,7 @@ public class RecorderActivity extends Activity {
 
     private void setButtonHandlers() {
         ((Button) findViewById(R.id.btnStart)).setOnClickListener(btnClick);
-        ((Button)stopButtonView).setOnClickListener(btnClick);
+        ((Button) findViewById(R.id.btnStop)).setOnClickListener(btnClick);
         ((Button) findViewById(R.id.btnList)).setOnClickListener(btnClick);
     }
 
@@ -113,6 +110,7 @@ public class RecorderActivity extends Activity {
         Time currentTime = new Time();
         currentTime.setToNow();
 
+        //create file name at time of recording
         currentFileName = file.getAbsolutePath() + "/" + currentTime.format2445();
 
         if(localAudioManager.isBluetoothScoOn()){
