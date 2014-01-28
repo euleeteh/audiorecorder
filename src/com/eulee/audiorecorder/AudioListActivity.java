@@ -1,7 +1,11 @@
 package com.eulee.audiorecorder;
 
+//Audio recorder/encoder obtained from:
+//http://www.devlper.com/2010/12/android-audio-recording-part-2/
+//Edited by Eu-Lee Teh 2013
+
+
 import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -56,29 +60,13 @@ public class AudioListActivity extends ListActivity {
             @Override
             public void onItemClick(AdapterView parent, View view,int position, long id){
                 AppLog.logString("playing " + id);
-                /*Intent playFile = new Intent(getApplicationContext(), PlaybackActivity.class);
-                startActivity(playFile);*/
-            }
-            /*@Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // getting listitem index
-                int songIndex = position;
 
-                // Starting new intent
-                Intent in = new Intent(getApplicationContext(),
-                        AndroidBuildingMusicPlayerActivity.class);
-                // Sending songIndex to PlayerActivity
-                in.putExtra("songIndex", songIndex);
-                setResult(100, in);
-                // Closing PlayListView
-                finish();
-            }*/
+            }
+
         });
 	}
-    /**
-     * Class to filter files which are having .mp3 extension
-     * */
+
+     // Class to filter files which are having .mp3 extension
     class fileExtensionFilter implements FilenameFilter {
         public boolean accept(File dir, String name) {
             return (name.endsWith(".wav") || name.endsWith(".WAV"));

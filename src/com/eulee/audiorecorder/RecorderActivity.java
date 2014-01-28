@@ -69,19 +69,17 @@ public class RecorderActivity extends Activity {
         ((Button) findViewById(R.id.btnStart)).setOnClickListener(btnClick);
         ((Button)stopButtonView).setOnClickListener(btnClick);
         ((Button) findViewById(R.id.btnList)).setOnClickListener(btnClick);
-        ((Button) findViewById(R.id.btnSettings)).setOnClickListener(btnClick);
     }
 
     private void enableButton(int id, boolean isEnable) {
         ((Button) findViewById(id)).setEnabled(isEnable);
     }
 
-    // enables "Start", "List" and "Settings" buttons when app is not recording
+    // enables "Start" and "List" buttons when app is not recording
     public void enableButtons(boolean buttonsEnable) {
         enableButton(R.id.btnStart, !buttonsEnable);
         enableButton(R.id.btnStop, buttonsEnable);
         enableButton(R.id.btnList, !buttonsEnable);
-        enableButton(R.id.btnSettings, !buttonsEnable);
     }
 
     private String getFilename() {
@@ -383,11 +381,6 @@ public class RecorderActivity extends Activity {
                 case R.id.btnList:
                     Intent intent_list = new Intent(v.getContext(), AudioListActivity.class);
                     startActivity(intent_list);
-                    break;
-
-                case R.id.btnSettings:
-                    Intent intent_settings = new Intent(v.getContext(), SettingsActivity.class);
-                    startActivity(intent_settings);
                     break;
             }
         }

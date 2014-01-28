@@ -35,7 +35,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.eulee.audiorecorder.AudioListActivity" />
-        <activity android:name="com.eulee.audiorecorder.SettingsActivity" />
     </application>
 
 </manifest>
