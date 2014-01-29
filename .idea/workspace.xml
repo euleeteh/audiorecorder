@@ -130,29 +130,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecorderActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="RecorderActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="360" column="59" selection-start="12629" selection-end="12629" vertical-scroll-proportion="-12.076923" vertical-offset="5806" max-vertical-offset="6664">
+            <state line="155" column="154" selection-start="5769" selection-end="5769" vertical-scroll-proportion="-0.15059222" vertical-offset="2724" max-vertical-offset="6766">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4533#4688#0" expanded="true" />
-                <element signature="e#4673#4674#0" expanded="true" />
-                <element signature="e#4798#6048#0" expanded="true" />
-                <element signature="e#5221#5930#0" expanded="true" />
-                <element signature="e#5899#5900#0" expanded="true" />
-                <element signature="e#6033#6034#0" expanded="true" />
-                <element signature="e#11221#13736#0" expanded="true" />
-                <element signature="e#13729#13730#0" expanded="true" />
+                <element signature="e#4565#4720#0" expanded="true" />
+                <element signature="e#4705#4706#0" expanded="true" />
+                <element signature="e#4830#6159#0" expanded="true" />
+                <element signature="e#5380#6041#0" expanded="true" />
+                <element signature="e#6010#6011#0" expanded="true" />
+                <element signature="e#6144#6145#0" expanded="true" />
+                <element signature="e#11512#13929#0" expanded="true" />
+                <element signature="e#13922#13923#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AudioListActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AudioListActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/AudioListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="673" selection-end="673" vertical-scroll-proportion="0.16346154" vertical-offset="306" max-vertical-offset="1241">
+            <state line="28" column="37" selection-start="862" selection-end="862" vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="1241">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -996,12 +996,12 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32768363" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28474575" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2542373" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2983051" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15819208" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26553673" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="-1678" y="316" width="1680" height="678" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25875705" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" x="-1678" y="316" width="1680" height="678" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1096,16 +1096,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_audiolist.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_playback.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -1123,28 +1113,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/AudioListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="360" column="59" selection-start="12629" selection-end="12629" vertical-scroll-proportion="-12.076923" vertical-offset="5806" max-vertical-offset="6664">
+        <state line="28" column="37" selection-start="862" selection-end="862" vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="1241">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4533#4688#0" expanded="true" />
-            <element signature="e#4673#4674#0" expanded="true" />
-            <element signature="e#4798#6048#0" expanded="true" />
-            <element signature="e#5221#5930#0" expanded="true" />
-            <element signature="e#5899#5900#0" expanded="true" />
-            <element signature="e#6033#6034#0" expanded="true" />
-            <element signature="e#11221#13736#0" expanded="true" />
-            <element signature="e#13729#13730#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/AudioListActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_audiolist.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="673" selection-end="673" vertical-scroll-proportion="0.16346154" vertical-offset="306" max-vertical-offset="1241">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/eulee/audiorecorder/RecorderActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="155" column="154" selection-start="5769" selection-end="5769" vertical-scroll-proportion="-0.15059222" vertical-offset="2724" max-vertical-offset="6766">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#4565#4720#0" expanded="true" />
+            <element signature="e#4705#4706#0" expanded="true" />
+            <element signature="e#4830#6159#0" expanded="true" />
+            <element signature="e#5380#6041#0" expanded="true" />
+            <element signature="e#6010#6011#0" expanded="true" />
+            <element signature="e#6144#6145#0" expanded="true" />
+            <element signature="e#11512#13929#0" expanded="true" />
+            <element signature="e#13922#13923#0" expanded="true" />
           </folding>
         </state>
       </provider>

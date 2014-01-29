@@ -36,6 +36,7 @@ public class RecorderActivity extends Activity {
     private static final int RECORDER_SAMPLERATE = 44100;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_STEREO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
+    private static Toast toast;
 
     private AudioRecord recorder = null;
     private AudioTrack liveStream = null;
@@ -146,12 +147,13 @@ public class RecorderActivity extends Activity {
 
                             AppLog.logString("Stop Recording - device disconnected");
                             stopRecording();
+                            toast.setText("Device Disconnected. Stop Recording...");
+                            toast.show();
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     // This code will always run on the UI thread, therefore is safe to modify UI elements.
-                                    Toast toast = Toast.makeText(getApplicationContext(), "Device Disconnected. Stop Recording...", Toast.LENGTH_SHORT);
-                                    toast.show();
+                                    //Toast toast = Toast.makeText(getApplicationContext(), "Device Disconnected. Stop Recording...", Toast.LENGTH_SHORT);
                                     enableButtons(false);
                                     AppLog.logString("Stopping bluetooth");
                                     localAudioManager.stopBluetoothSco();
@@ -165,7 +167,7 @@ public class RecorderActivity extends Activity {
             btMicCheckerThread.start();
         }
         else{
-            AppLog.logString("else term here..");
+            // AppLog.logString("else term here..");
             return;
         }
     }
@@ -249,6 +251,8 @@ public class RecorderActivity extends Activity {
         long byteRate = RECORDER_BPP * RECORDER_SAMPLERATE * channels / 8;
 
         byte[] data = new byte[bufferSize];
+        //Toast toastie = Toast.makeText(getApplicationContext(), "Saving File...", Toast.LENGTH_SHORT);
+        //toast.setText("Saving File...");
 
         try {
             in = new FileInputStream(inFilename);
@@ -260,6 +264,8 @@ public class RecorderActivity extends Activity {
 
             WriteWaveFileHeader(out, totalAudioLen, totalDataLen,
                     longSampleRate, channels, byteRate);
+
+            //toast.show();
 
             while (in.read(data) != -1) {
                 out.write(data);
@@ -332,15 +338,14 @@ public class RecorderActivity extends Activity {
     private View.OnClickListener btnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            toast = Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT);
 
-            Context context = getApplicationContext();
             CharSequence toastText;
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast;
 
             switch (v.getId()) {
                 case R.id.btnStart:
 
+                    //
                     AppLog.logString("starting bluetooth audio SCO connection...");
                     localAudioManager.startBluetoothSco();
                     AppLog.logString("check 1: BT mic is on: " + Boolean.toString(localAudioManager.isBluetoothScoOn()));
@@ -357,20 +362,21 @@ public class RecorderActivity extends Activity {
                         localAudioManager.stopBluetoothSco();
                         AppLog.logString("check 3: BT mic is on: " + Boolean.toString(localAudioManager.isBluetoothScoOn()));
                     }
-                    toast = Toast.makeText(context, toastText, duration);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+                    toast.setText(toastText);
                     toast.show();
                     break;
 
                 case R.id.btnStop:
                     AppLog.logString("check 4: BT mic is on: " + Boolean.toString(localAudioManager.isBluetoothScoOn()));
                     toastText = "Stop Recording...";
-                    toast = Toast.makeText(context, toastText, duration);
-                    toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 0);
+                    toast.setText(toastText);
                     toast.show();
                     AppLog.logString("Stop Recording");
                     enableButtons(false);
                     stopRecording();
+                    toastText = "File Saved.";
+                    toast.setText(toastText);
+                    toast.show();
                     AppLog.logString("Stopping bluetooth");
                     localAudioManager.stopBluetoothSco();
                     AppLog.logString("check 5: BT mic is on: " + Boolean.toString(localAudioManager.isBluetoothScoOn()));
